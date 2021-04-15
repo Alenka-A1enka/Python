@@ -1,0 +1,89 @@
+#лабораторная №5
+#Соседями элемента A{j в матрице назовем элементы Аы, 
+#где i - l < k < i + l ,j - 1 <l<j + 1, (k, I) 
+#Операция сглаживания матрицы дает новую матрицу
+#того же размера, каждый элемент которой получается 
+#как среднее арифметическоеимеющихся соседей соответствующего 
+#элемента исходной матрицы. Построить результат сглаживания 
+#заданной вещественной матрицы размером 10 х 10. 
+
+import random
+
+#генерация вещественной матрицы
+mas = [[(random.randrange(0, 10) + random.randrange(0, 10) / 10) for i in range(10)] for j in range(10)]
+for i in range(10):
+    for j in range(10):
+        znak = random.randrange(0, 10)
+        if znak < 5:
+            mas[i][j] = -mas[i][j]
+            print(' ', mas[i][j], end = '')
+        else:
+            print('  ', mas[i][j], end = '')
+    print()
+
+#генерация целочисленной матрицы
+#mas = [[(random.randrange(0, 10)) for i in range(10)] for j in range(10)]
+#for i in range(10):
+#    for j in range(10):
+#        znak = random.randrange(0, 10)
+#        if znak < 5:
+#            mas[i][j] = -mas[i][j]
+#            print(' ', mas[i][j], end = '')
+#        else:
+#            print('  ', mas[i][j], end = '')
+#    print()
+
+
+mas2 = [[(random.randrange(0, 10) + random.randrange(0, 10) / 10) for i in range(10)] for j in range(10)]
+print()
+print('Сглаженная матрица:')
+for i in range(10):
+    for j in range(10):
+        sum = 0
+        amount = 0
+        if i > 0:
+            if j > 0:
+                sum += mas[i-1][j-1]
+                amount += 1
+            sum += mas[i-1][j]
+            amount += 1
+            if j < 9:
+                sum += mas[i-1][j+1]
+                amount += 1
+
+        if j > 0:
+            sum += mas[i][j-1]
+            amount += 1
+        if j < 9:
+            sum += mas[i][j+1]
+            amount += 1
+
+        if i < 9:
+            if j > 0:
+                sum += mas[i+1][j-1]
+                amount += 1
+            sum += mas[i+1][j]
+            amount += 1
+            if j < 9:
+                sum += mas[i+1][j+1]
+                amount += 1
+        A = sum / amount
+        mas2[i][j] = A
+        if A < 0:
+            print(' ', round(A, 1), end = '')
+        else:
+            print('  ', round(A, 1), end = '')
+    print()
+
+
+#В сглаженной матрице 
+#найти сумму модулей элементов, расположенных нижеглавной диагонали.
+print()
+sum = 0
+for i in range(1, 10):
+    for j in range(0, i):
+        if mas[i][j] < 0:
+            mas[i][j] = -mas[i][j]
+        sum += mas[i][j]
+print('Сумма модулей элементов, ниже главной диагонали: ', round(sum, 1))
+
