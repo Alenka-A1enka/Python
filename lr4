@@ -1,0 +1,54 @@
+import math 
+import random
+from array import*
+
+#В одномерном массиве, состоящем из п вещественных элементов, вычислить максимальный элемент массива
+mas = array('f', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+print('Элементы массива:')
+for i in range(0, 10):
+    mas[i] = random.random() + random.random()*10
+    mas[i] = round(mas[i], 3)
+    znak = random.random()
+    if znak < 0.5:
+        mas[i] = -mas[i]
+    print(round(mas[i], 3))
+print()
+
+max = -100
+for i in mas:
+    if i > max:
+        max = i
+print('максимальный элемент массива: ', round(max, 3))
+
+#сумму элементов массива, расположенных до последнего положительного элемента
+index = -1
+sum = 0
+for i in range(9, -1, -1):
+    if mas[i] > 0:
+        index = i
+        break
+for i in range(0, index):
+    sum += mas[i]
+print('сумма элементов массива, расположенных до последнего положительного элемента: ', round(sum, 3))
+
+#Сжать массив, удалив из него все элементы, модуль которых 
+#находится в интервале[а, Ь]. Освободившиеся в конце массива элементы заполнить нулями.
+print('Укажите начало интервала: ')
+a = int(input())
+print('Укажите конец интервала: ')
+b = int(input())
+for i in range(9, -1, -1):
+    if math.fabs(mas[i]) >= a and math.fabs(mas[i]) <= b:
+        for j in range(i, 9):
+            mas[j] = mas[j + 1]
+        mas[9] = 0
+
+
+for i in range(0, 10):
+    print(round(mas[i], 3))
+print()
+
+
+
+
+
