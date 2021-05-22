@@ -1,0 +1,38 @@
+#Сумма целых чисел от 1 до N
+def sum(mass, n):
+    i = int(n - 1) #ставим указатель на последний элемент массива
+    if i == 0:
+        return mass[0] #дно рекурсии: возвращаем последний элемент массива
+    else :
+        return mass[i] + sum(mass, i) #обращаемся к методу с новым индексом
+
+
+import random
+print('Введите число N')
+n = int(input())
+mass = [random.randrange(0,10) for y in range(n)] #генерация случайных чисел
+#вывод массива
+for i in range(0, len(mass)):
+    print(mass[i])
+summa = sum(mass, n) #обращаемся к рекурсивному методу
+print("Сумма: ", summa)
+
+#Минимальный положительный элемент массива
+def min(mass, index):
+    if index == len(mass) - 1:
+        return mass[index] #дно рекурсии: если индекс уставновлен на последний элемент массива, то возвращаем его
+    min_el = min(mass, index + 1) #использовании рекурсии для следующего элемента
+    if mass[index] < min_el:
+        return mass[index] #если новый элемент меньше, чем переменная min_el, переписываем ее
+    else:
+        return min_el
+
+print()
+print('Задание 2')
+print('Массив:')
+mas2 = [random.randrange(0,10) for y in range(n)] #генерация случайный чисел
+#вывод массива
+for i in range(0, len(mas2)):
+    print(mas2[i])
+min_el = min(mas2, 0) #обращение к рекурсии
+print("Минимальный элемент: ", min_el)
