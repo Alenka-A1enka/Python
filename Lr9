@@ -1,0 +1,80 @@
+def returnA(str):
+    #поиск первого числа входной последовательности
+    #поиск индексов под которыми стоят скобки
+    ind1 = str.find('(')
+    #переменная для записи числа из входной строки
+    str1= ""
+    #поиск числа
+    for i in range(0, ind1):
+        str1 += str[i]
+    #перевод строки в числовое значение
+    a = int(str1)
+    return a
+
+
+def returnB(str):
+    #поиск второго числа входной последовательности
+    #поиск индексов под которыми стоят скобки
+    ind1 = str.find('(')
+    ind2 = str.find(')')
+    #переменная для записи числа
+    str2 = ""
+    #поиск числа
+    for i in range(ind1 + 1, ind2):
+        str2 += str[i]
+    #перевод строки в числовое значение
+    b = int(str2)
+    return b
+
+
+def sum(a, b, c, d):
+    print(f'Результат сложения чисел: {a} + {b}i и {c} + {d}i равен {a+c} + {b + d}i' )
+def razn(a, b, c, d):
+    print(f'Результат разности чисел: {a} + {b}i и {c} + {d}i равен {a-c} + {b - d}i' )
+def umn(a, b, c, d):
+    print(f'Результат умножения чисел: {a} + {b}i и {c} + {d}i равен {a*c - b * d} + {b * c + a * d}i' )
+def delen(a, b, c, d):
+    print(f'Результат деления чисел: {a} + {b}i и {c} + {d}i равен {(a*c+b*d)/(c*c+d*d)} + {(b*c-a*d)/(c*c+d*d)}i' )
+
+
+while(True):
+    print('\nВыберите операцию: 1 - сложение, 2 - вычитание, 3 - умножение, 4 - деление')
+    try:
+        #если входная переменная не является числом, вызывается переменная
+        check = int(input()) #номер операции
+        if(check > 4 or check <= 0):
+            print('Число вне доступного диапазона')
+            continue
+    except:
+        print('неправильный формат ввода')
+        continue
+    print('Введите первое комплексное число a + bi в виде a(b)')
+    str = input()
+    #проверка введенных комплексных чисел
+    try:
+        a = returnA(str)
+        b = returnB(str)
+    except:
+        print('Неправильный формат вводa')
+        continue
+    print('Введите второе комплексное число a + bi в виде a(b)')
+    str = input()
+     #проверка введенных комплексных чисел
+    try:
+        c = returnA(str)
+        d = returnB(str)
+    except:
+        print('Неправильный формат вводa')
+        continue
+    #выбираем нужную функцию
+    if check == 1:
+        sum(a, b, c, d)
+    if check ==2:
+        razn(a, b, c, d)
+    if check == 3:
+        umn(a, b, c, d)
+    if check == 4:
+        delen(a, b, c, d)
+
+
+    
